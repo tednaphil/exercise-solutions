@@ -68,3 +68,11 @@ function moveRobot (directionString) {
   
   console.log(moveRobot("GRGL"))
   console.log(moveRobot("GRGRGRG"))
+
+ const twoFer = (name = 'you') => 
+    `One for ${name}, one for me.`
+  ;
+
+module.exports= {
+  twoFer
+}
