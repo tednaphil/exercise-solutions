@@ -1,9 +1,14 @@
 const chai = require("chai");
 const expect = chai.expect;
 
-const { twoFer } = require('../javascript/index')
+const { twoFer, moveRobot } = require('../javascript/index')
 
 describe('JavaScript Exercises', () => {
+    describe('MoveRobot', () => {
+        it('doesn\'t end at starting position', () => {
+            expect(moveRobot("GRGL")).to.equal(false);
+        })
+    })
     describe('twoFer()', () => {
         it('no name given', () => {
           expect(twoFer()).to.equal('One for you, one for me.');

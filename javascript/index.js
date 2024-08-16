@@ -74,5 +74,6 @@ function moveRobot (directionString) {
   ;
 
 module.exports = {
+  moveRobot,
   twoFer
 }
