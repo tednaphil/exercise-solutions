@@ -73,6 +73,6 @@ function moveRobot (directionString) {
     `One for ${name}, one for me.`
   ;
 
-module.exports= {
+module.exports = {
   twoFer
 }

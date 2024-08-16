@@ -2,15 +2,17 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-      "test": "./node_modules/mocha/bin/mocha test/ --reporter dot --require mocha-clean",
-      "testJavaScript": "./node_modules/mocha/bin/mocha test/js-exercises-test.js --reporter dot --require mocha-clean"
+        "test": "./node_modules/mocha/bin/mocha test/ --reporter dot --require mocha-clean",
+        "testJavaScript": "./node_modules/mocha/bin/mocha test/js-exercises-test.js --reporter dot --require mocha-clean"
     },
     "keywords": [
-      "js"
+        "js"
     ],
     "devDependencies": {
-      "chai": "^4.1.2",
-      "mocha": "^8.2.1",
-      "mocha-clean": "^1.0.0"
+        "@types/mocha": "^10.0.7",
+        "@types/node": "^22.4.0",
+        "chai": "^4.1.2",
+        "mocha": "^8.2.1",
+        "mocha-clean": "^1.0.0"
     }
-  }
+}
