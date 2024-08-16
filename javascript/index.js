@@ -65,15 +65,8 @@ function moveRobot (directionString) {
     })
     return (currentPosition[0] === startingPosition[0] && currentPosition[1] === startingPosition[1])
   }
-  
-  console.log(moveRobot("GRGL"))
-  console.log(moveRobot("GRGRGRG"))
 
- const twoFer = (name = 'you') => 
-    `One for ${name}, one for me.`
-  ;
 
 module.exports = {
-  moveRobot,
-  twoFer
+  moveRobot
 }
