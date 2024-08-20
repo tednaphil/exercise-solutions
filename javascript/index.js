@@ -111,8 +111,38 @@ function paliSum(num = 0, arr = []) {
   }
 }
 
+//FACTORIZE PROMPT
+// Create a function that takes a number as its argument and returns an array of all its factors.
+
+
+// NOTES
+// - A factor is a number that evenly divides into another number without leaving a remainder. 
+// - Assume the input number will be positive. 
+// - Try to implement this both iteratively & recursively if you have time.
+
+
+//PSEUDOCODE
+//add a divider argument that will increment up with each invokation
+//define an array to collect factors
+//if num divided by divider has no remainder (!%)? push the divider to the array
+//return invokation of factorize with div + 1
+
+//if divider > num, return array of factors
+
+function factorize(num, div = 1, factors = []) {
+  if(!(num % div) && div <= num) {
+    factors.push(div);
+    return factorize(num, div + 1, factors)
+  } else if(num % div && div <= num) {
+    return factorize(num, div + 1, factors)
+  } else if(div > num) {
+    return factors
+  }
+}
+
 
 module.exports = {
   moveRobot,
-  paliSum
+  paliSum,
+  factorize
 }

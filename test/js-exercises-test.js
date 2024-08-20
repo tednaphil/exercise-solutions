@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
 
-const { moveRobot, paliSum } = require('../javascript/index')
+const { moveRobot, paliSum, factorize } = require('../javascript/index')
 
 describe('JavaScript Exercises', () => {
     describe('MoveRobot', () => {
@@ -22,6 +22,17 @@ describe('JavaScript Exercises', () => {
                1007, 1008, 1010, 1011, 1012,
                1013, 1014, 1015, 1016, 1017
              ]);
+        })
+    })
+    describe('Factorize', () => {
+        it('returns an array of factors for a provided whole number', () => {
+            expect(factorize(12)).to.deep.equal([1, 2, 3, 4, 6, 12]);
+        })
+        it('returns an array of factors for another provided whole number', () => {
+            expect(factorize(4)).to.deep.equal([1, 2, 4]);
+        })
+        it('returns an array of factors for a prime number', () => {
+            expect(factorize(17)).to.deep.equal([1, 17]);
         })
     })
 })
