@@ -7,6 +7,10 @@ This repo is where I collect my solutions to tech challenges and code exercises 
 [<img src="https://img.shields.io/badge/Codewars-B1361E?logo=codewars&logoColor=fff&style=for-the-badge" alt="codewars badge"/>](https://www.codewars.com/users/tednaphil/completed_solutions)
 </div>
 
+## See my Code
+Solutions can be found in the corresponding language directory's `index` file
+e.g. [`javascript/index.js`](https://github.com/tednaphil/exercise-solutions/blob/main/javascript/index.js)
+
 ## Tests
 Some of the challenges have accompanying tests. To clone the repo and run the tests locally, run the following on your terminal command line:
 
