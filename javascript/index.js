@@ -129,16 +129,30 @@ function paliSum(num = 0, arr = []) {
 
 //if divider > num, return array of factors
 
-function factorize(num, div = 1, factors = []) {
-  if(!(num % div) && div <= num) {
-    factors.push(div);
-    return factorize(num, div + 1, factors)
-  } else if(num % div && div <= num) {
-    return factorize(num, div + 1, factors)
-  } else if(div > num) {
-    return factors
-  }
-}
+// RECURSIVE SOLUTION:
+
+// function factorize(num, div = 1, factors = []) {
+//   if(!(num % div) && div <= num) {
+//     factors.push(div);
+//     return factorize(num, div + 1, factors)
+//   } else if(num % div && div <= num) {
+//     return factorize(num, div + 1, factors)
+//   } else if(div > num) {
+//     return factors
+//   }
+// }
+
+// ITERATIVE SOLUTION:
+
+function factorize(num) {
+  const factors = [];
+  for (let i = 0; i <= num; i++){
+    if(num % i === 0){
+      factors.push(i)
+    }
+  }; 
+  return factors
+};
 
 //STEPS COLLATZ PROMPT
 // Instructions
