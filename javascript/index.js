@@ -24,7 +24,7 @@
 //if we receive R and current direction is north, currentDirection will be reassigned to 'e' -> so on for rest of directions
 //if we receive an L and current direction is north, current Direction will be reassigned to 'w' -> so on for the rest of directions
 
-function moveRobot(directionString) {
+const moveRobot = (directionString) => {
   const startingPosition = [0, 0];
   let currentPosition = [0, 0];
   let currentDirection = "n";
@@ -93,7 +93,7 @@ function moveRobot(directionString) {
 //create converter function??
 //use a while loop??
 
-function paliSum(num = 0, arr = []) {
+const paliSum = (num = 0, arr = []) => {
   let startingNum = num;
   const paliNums = arr;
   let reverseNum = parseInt(
@@ -143,7 +143,7 @@ function paliSum(num = 0, arr = []) {
 
 // RECURSIVE SOLUTION:
 
-function factorize(num, div = 1, factors = []) {
+const factorize = (num, div = 1, factors = []) => {
   if (!(num % div) && div <= num) {
     factors.push(div);
     return factorize(num, div + 1, factors);
