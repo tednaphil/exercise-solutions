@@ -191,10 +191,51 @@ const steps = (num, counter = 0) => {
   }
 };
 
+//PERFECT NUMBER PROMPT:
+// Determine if a number is perfect, abundant, or deficient based on Nicomachus' (60 - 120 CE) classification scheme for positive integers.
+
+// The Greek mathematician Nicomachus devised a classification scheme for positive integers, identifying each as belonging uniquely to the
+//categories of perfect, abundant, or deficient based on their aliquot sum. The aliquot sum is defined as the sum of the factors of a number
+//not including the number itself. For example, the aliquot sum of 15 is 1 + 3 + 5 = 9.
+
+//PSEUDOCODE:
+//input: number
+//output: string
+//Loop to find factors of a number (omitting the number itself)
+  //if current index is a factor, add to factors array
+//define a variable to store the aliquot sum
+//iterate through the factors array returned
+  //increment the aliquotSum variable by adding each element of the factors array
+//if the aliquot sum is greater than the num, return "abundant"
+//if less than, "deficient"
+//if equal to, "perfect"
+
+const classify = (num) => {
+  if(num <= 0) {
+    throw new Error('Classification is only possible for natural numbers.')
+  };
+  const factors = [];
+  for (let i = 0; i < num; i++) {
+      if(num % i === 0) {
+        factors.push(i)
+      }
+  };
+  let aSum = 0;
+  factors.forEach(factor => aSum += factor);
+  if(aSum > num) {
+    return 'abundant'
+  } else if(aSum < num) {
+    return 'deficient'
+  } else if(aSum === num) {
+    return 'perfect'
+  };
+};
+
 
 module.exports = {
   moveRobot,
   paliSum,
   factorize,
-  steps
-}
+  steps,
+  classify
+};

@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = chai.expect;
 
-const { moveRobot, paliSum, factorize, steps } = require('../javascript/index')
+const { moveRobot, paliSum, factorize, steps, classify } = require('../javascript/index')
 
 describe('JavaScript Exercises', () => {
     describe('MoveRobot', () => {
@@ -35,7 +35,7 @@ describe('JavaScript Exercises', () => {
             expect(factorize(17)).to.deep.equal([1, 17]);
         });
     });
-    describe('Steps', () => {
+    describe('Steps - Collatz Conjecture', () => {
         it('zero steps for one', () => {
           expect(steps(1)).to.equal(0);
         });
@@ -58,5 +58,54 @@ describe('JavaScript Exercises', () => {
             steps(-15);
           }).to.throw('Only positive numbers are allowed');
         });
+    });
+    describe('Classify - Perfect Numbers', () => {
+      describe('Invalid Inputs', () => {
+        it('Zero is rejected (not a natural number)', () => {
+          expect(() => {classify(0)}).to.throw('Classification is only possible for natural numbers.');
+        });
+        it('Negative integer is rejected (not a natural number)', () => {
+          expect(() => classify(-1)).to.throw('Classification is only possible for natural numbers.');
+        });
       });
+      describe('Perfect Numbers', () => {
+        it('Smallest perfect number is classified correctly', () => {
+          expect(classify(6)).to.equal('perfect');
+        });
+        it('Medium perfect number is classified correctly', () => {
+          expect(classify(28)).to.equal('perfect');
+        });
+        it('Large perfect number is classified correctly', () => {
+          expect(classify(33550336)).to.equal('perfect');
+        });
+      });
+      describe('Abundant Numbers', () => {
+        it('Smallest abundant number is classified correctly', () => {
+          expect(classify(12)).to.equal('abundant');
+        });
+        it('Medium abundant number is classified correctly', () => {
+          expect(classify(30)).to.equal('abundant');
+        });
+        it('Large abundant number is classified correctly', () => {
+          expect(classify(33550335)).to.equal('abundant');
+        });
+      });
+      describe('Deficient Numbers', () => {
+        it('Edge case (no factors other than itself) is classified correctly', () => {
+          expect(classify(1)).to.equal('deficient');
+        });
+        it('Smallest prime deficient number is classified correctly', () => {
+          expect(classify(2)).to.equal('deficient');
+        });
+        it('Smallest non-prime deficient number is classified correctly', () => {
+          expect(classify(4)).to.equal('deficient');
+        });
+        it('Medium deficient number is classified correctly', () => {
+          expect(classify(32)).to.equal('deficient');
+        });
+        it('Large deficient number is classified correctly', () => {
+          expect(classify(33550337)).to.equal('deficient');
+        });
+      });
+    });
 })
