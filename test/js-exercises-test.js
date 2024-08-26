@@ -1,7 +1,12 @@
 const chai = require("chai");
 const expect = chai.expect;
-
-const { moveRobot, paliSum, factorize, steps, classify } = require('../javascript/index')
+const { moveRobot,
+        paliSum,
+        factorize,
+        steps,
+        classify,
+        findMatches
+       } = require('../javascript/index')
 
 describe('JavaScript Exercises', () => {
     describe('MoveRobot', () => {
@@ -107,5 +112,16 @@ describe('JavaScript Exercises', () => {
           expect(classify(33550337)).to.equal('deficient');
         });
       });
+      describe('Find Matches', () => {
+        it('Returns an array of numbers present in all 3 arrays', () => {
+          const nums1 = [1, 2, 4, 5, 8]
+          const nums2 = [2, 3, 5, 7, 9]
+          const nums3 = [1, 2, 5, 8, 9]
+          expect(findMatches(nums1, nums2, nums3)).to.deep.equal([2, 5])
+        });
+        it('Returns an empty array if no matches found', () => {
+          expect(findMatches([1, 2, 3], [4, 5, 6], [7, 8, 9])).to.deep.equal([])
+        })
+      })
     });
 })

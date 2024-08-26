@@ -244,10 +244,51 @@ const classify = (num) => {
   }
 };
 
+//MILLIONS OF NUMBERS PROMPT
+
+// You are given three arrays of equal size. Each array has 1 million RANDOM integer values.
+
+// Assume that each array is already sorted in ascending order and that no individual array has any duplicate values.
+
+// Your goal is to write a method/function that will return an array of any/all values which are present in all three arrays.
+
+// Bonus: Once you’ve found a working solution, try to optimize to run in O(n) time and 1x space complexity.
+
+// Small Scale Example Below
+
+//     #JavaScript
+//     nums1 = [1, 2, 4, 5, 8]
+//     nums2 = [2, 3, 5, 7, 9]
+//     nums3 = [1, 2, 5, 8, 9]
+//     findMatches(nums1, nums2, nums3)
+//     => [2, 5]
+
+// PSEUDOCODE
+
+//compile list of numbers present in all three arrays
+//if no matches, return empty array?
+
+//input 3 arrays of nums
+//output array of nums present in all three arg arrays
+
+//iterate through arr1 with filter for
+    //if arr 2 & arr 3 include current num
+
+const findMatches = (arr1, arr2, arr3) => {
+  const matches = arr1.filter(num => {
+      return arr2.includes(num) && arr3.includes(num)
+  });
+  return matches
+};
+
+//refactor with a recursive approach
+
+
 module.exports = {
   moveRobot,
   paliSum,
   factorize,
   steps,
   classify,
+  findMatches
 };
