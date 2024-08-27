@@ -284,11 +284,104 @@ const findMatches = (arr1, arr2, arr3) => {
 //refactor with a recursive approach
 
 
+//PROTEIN TRANSLATION PROMPT
+
+// Translate RNA sequences into proteins.
+
+// RNA can be broken into three nucleotide sequences called codons, and then translated to a polypeptide like so:
+
+// RNA: "AUGUUUUCU" => translates to
+
+// Codons: "AUG", "UUU", "UCU" => which become a polypeptide with the following sequence =>
+
+// Protein: "Methionine", "Phenylalanine", "Serine"
+
+// There are 64 codons which in turn correspond to 20 amino acids; however, all of the codon sequences and resulting amino acids are not important in this exercise. If it works for one codon, the program should work for all of them. However, feel free to expand the list in the test suite to include them all.
+
+// There are also three terminating codons (also known as 'STOP' codons); if any of these codons are encountered (by the ribosome), all translation ends and the protein is terminated.
+
+// All subsequent codons after are ignored, like this:
+
+// RNA: "AUGUUUUCUUAAAUG" =>
+
+// Codons: "AUG", "UUU", "UCU", "UAA", "AUG" =>
+
+// Protein: "Methionine", "Phenylalanine", "Serine"
+
+
+// Below are the codons and resulting Amino Acids needed for the exercise.
+
+// Codon	Protein
+// AUG	Methionine
+// UUU, UUC	Phenylalanine
+// UUA, UUG	Leucine
+// UCU, UCC, UCA, UCG	Serine
+// UAU, UAC	Tyrosine
+// UGU, UGC	Cysteine
+// UGG	Tryptophan
+// UAA, UAG, UGA	STOP
+
+
+// If an invalid character or codon is encountered during translation, it should throw an error with the message Invalid codon.
+
+
+//PSEUDOCODE:
+//input: string (codons)
+//output: array of strings (protein names)
+//define object literal with codon translations (UUU: Phenylalanine, etc)
+//define accumulating array
+//use for loop to iterate through codon string, incrementing i up 3 each loop
+  //concat codonInput i, i+1, i+2
+  //if concatenated string === UAA or UAG or UGA reassign i to codonInput.length,\;
+  //if the codon translation doesn't exist, throw an error;
+  //otherwise push the value of the concatenated string key in the translation object to the accumulating array
+// return the accumulated array
+
+const translate = (codonInput) => {
+  const translator = {
+    AUG: 'Methionine',
+    UUU: 'Phenylalanine',
+    UUC: 'Phenylalanine',
+    UUA: 'Leucine',
+    UUG: 'Leucine',
+    UCU: 'Serine',
+    UCC: 'Serine',
+    UCA: 'Serine',
+    UCG: 'Serine',
+    UAU: 'Tyrosine',
+    UAC: 'Tyrosine',
+    UGU: 'Cysteine',
+    UGC: 'Cysteine',
+    UGG: 'Tryptophan',
+    UAA: 'STOP',
+    UAG: 'STOP',
+    UGA: 'STOP'
+  };
+  let proteins = [];
+  if(!codonInput) {
+    return proteins
+  };
+  for(let i = 0; i < codonInput.length; i += 3 ) {
+    let codon = codonInput[i] + codonInput[i + 1] + codonInput[i + 2];
+    if(translator[codon] === 'STOP'){
+      i = codonInput.length
+    } else if(!translator[codon]){
+      throw new Error('Invalid codon')
+    } else {
+      proteins.push(translator[codon])
+    }
+  }
+  return proteins
+};
+
+
+
 module.exports = {
   moveRobot,
   paliSum,
   factorize,
   steps,
   classify,
-  findMatches
+  findMatches,
+  translate
 };

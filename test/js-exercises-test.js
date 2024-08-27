@@ -5,7 +5,8 @@ const { moveRobot,
         factorize,
         steps,
         classify,
-        findMatches
+        findMatches,
+        translate
        } = require('../javascript/index')
 
 describe('JavaScript Exercises', () => {
@@ -112,16 +113,95 @@ describe('JavaScript Exercises', () => {
           expect(classify(33550337)).to.equal('deficient');
         });
       });
-      describe('Find Matches', () => {
-        it('Returns an array of numbers present in all 3 arrays', () => {
-          const nums1 = [1, 2, 4, 5, 8]
-          const nums2 = [2, 3, 5, 7, 9]
-          const nums3 = [1, 2, 5, 8, 9]
-          expect(findMatches(nums1, nums2, nums3)).to.deep.equal([2, 5])
-        });
-        it('Returns an empty array if no matches found', () => {
-          expect(findMatches([1, 2, 3], [4, 5, 6], [7, 8, 9])).to.deep.equal([])
-        })
-      })
     });
+    describe('Find Matches', () => {
+      it('Returns an array of numbers present in all 3 arrays', () => {
+        const nums1 = [1, 2, 4, 5, 8]
+        const nums2 = [2, 3, 5, 7, 9]
+        const nums3 = [1, 2, 5, 8, 9]
+        expect(findMatches(nums1, nums2, nums3)).to.deep.equal([2, 5])
+      });
+      it('Returns an empty array if no matches found', () => {
+        expect(findMatches([1, 2, 3], [4, 5, 6], [7, 8, 9])).to.deep.equal([])
+      });
+    });
+    describe('ProteinTranslation', () => {
+      it('Empty RNA has no proteins', () => {
+        expect(translate()).to.deep.equal([]);
+      });
+      describe('Single codons', () => {
+        const mapping = [
+          ['Methionine', ['AUG']],
+          ['Phenylalanine', ['UUU', 'UUC']],
+          ['Leucine', ['UUA', 'UUG']],
+          ['Serine', ['UCU', 'UCC', 'UCA', 'UCG']],
+          ['Tyrosine', ['UAU', 'UAC']],
+          ['Cysteine', ['UGU', 'UGC']],
+          ['Tryptophan', ['UGG']],
+        ];
+        mapping.forEach(([protein, codons]) => {
+          codons.forEach((codon, index) => {
+            const seq = index + 1;
+            it(`${protein} RNA sequence ${seq} translates into ${protein}`, () => {
+              expect(translate(codon)).to.deep.equal([protein]);
+            });
+          });
+        });
+        const stopCodons = ['UAA', 'UAG', 'UGA'];
+        stopCodons.forEach((codon, index) => {
+          it(`STOP codon RNA sequence ${index + 1}`, () => {
+            expect(translate(codon)).to.deep.equal([]);
+          });
+        });
+      });
+      describe('Multiple codons', () => {
+        it('Sequence of two protein codons translates into proteins', () => {
+          expect(translate('UUUUUU')).to.deep.equal(['Phenylalanine', 'Phenylalanine']);
+        });
+        it('Sequence of two different protein codons translates into proteins', () => {
+          expect(translate('UUAUUG')).to.deep.equal(['Leucine', 'Leucine']);
+        });
+        it('Translate RNA strand into correct protein list', () => {
+          expect(translate('AUGUUUUGG')).to.deep.equal([
+            'Methionine',
+            'Phenylalanine',
+            'Tryptophan',
+          ]);
+        });
+        it('Translation stops if STOP codon at beginning of sequence', () => {
+          expect(translate('UAGUGG')).to.deep.equal([]);
+        });
+        it('Translation stops if STOP codon at end of three-codon sequence', () => {
+          expect(translate('AUGUUUUAA')).to.deep.equal(['Methionine', 'Phenylalanine']);
+        });
+        it('Translation stops if STOP codon in middle of three-codon sequence', () => {
+          expect(translate('UGGUAGUGG')).to.deep.equal(['Tryptophan']);
+        });
+        it('Translation stops if STOP codon in middle of six-codon sequence', () => {
+          expect(translate('UGGUGUUAUUAAUGGUUU')).to.deep.equal([
+            'Tryptophan',
+            'Cysteine',
+            'Tyrosine',
+          ]);
+        });
+      });
+      describe('Unexpected strands', () => {
+        it("Non-existing codon can't translate", () => {
+          expect(() => translate('AAA')).to.throw('Invalid codon');
+        });
+        it("Unknown amino acids, not part of a codon, can't translate", () => {
+          expect(() => translate('XYZ')).to.throw('Invalid codon');
+        });
+        it("Incomplete RNA sequence can't translate", () => {
+          expect(() => translate('AUGU')).to.throw('Invalid codon');
+        });
+        it('Incomplete RNA sequence can translate if valid until a STOP codon', () => {
+          expect(translate('UUCUUCUAAUGGU')).to.deep.equal([
+            'Phenylalanine',
+            'Phenylalanine',
+          ]);
+        });
+      });
+    });
+    
 })
