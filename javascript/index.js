@@ -381,11 +381,16 @@ const translate = (codonInput) => {
  * 'Tropical Island' takes 3 minutes and 'All or Nothing' takes 5 minutes.
  * For all other drinks (e.g., special offers) you can assume a preparation time of 2.5 minutes.
  *
+ * 
+ * ANNOTATION
  * input:
  *  {string} name of juice
  * output:
  *  {number} time in minutes
- */
+ * 
+ * if the param matches any provided case, return the respective prep time in minutes
+ * all other cases return the time of 2.5
+*/
 const timeToMixJuice = (name) => {
   switch(name) {
     case 'Pure Strawberry Joy':
@@ -410,13 +415,24 @@ const timeToMixJuice = (name) => {
  * She can get 6 wedges from a 'small' lime, 8 wedges from a 'medium' lime and 10 from a 'large' lime.
  * She always cuts the limes in the order in which they appear in the list, starting with the first item.
  * She keeps going until she reached the number of wedges that she needs or until she runs out of limes.
-
  *
+ * ANNOTATION
  * input: 
  *  {number} wedgesNeeded
  *  {string[]} lime inventory (sizes)
  * output:
  *  {number} number of limes cut
+ * 
+ * declare a variable to count wedges that have been cut with an initial value of 0
+ * declare an incrementer variable to count the loops through the limes array with an initial value of 0
+ * loop through the limes array while i is less than or equal to the length of limes array
+ * return i and stop the loop if
+ *    wedges is equal to or greater than the wedgesNeeded param OR
+ *    all limes have been cut (i is equal to the length of the limes array)
+ * declare switch case block that will evaluate the current element in the limes array (limes at index position i)
+ *    increment wedges up the respective amount then break (if limes[i] is 'small', add 6 to wedges variable)
+ * increment i up by one to move to the next element of the limes array
+ * 
  */
 const limesToCut = (wedgesNeeded, limes) => {
   let wedges = 0;
@@ -452,11 +468,18 @@ const limesToCut = (wedgesNeeded, limes) => {
  * a certain juice, she will always finish it even if she has to work a bit longer.
  * If there are no remaining orders left that Dmitry needs to take care of, an empty array should be returned.
  *
+ * ANNOTATION
  * input:
  *  {number} timeLeft
  *  {string[]} orders
  * output:
  *  {string[]} remaining orders when no time remaining
+ * 
+ * execute the following while the timeLeft param is greater than 0:
+ *    define switch/case block to evaluate the first element in the orders array
+ *        decrement timeLeft based on the respective case and break
+ *    remove the first element from the orders array (shift)
+ * once timeLeft is less than or equal to 0 (i.e. not greater than 0), return the orders array
  */
 const remainingOrders = (timeLeft, orders) => {
   do {
