@@ -281,8 +281,6 @@ const findMatches = (arr1, arr2, arr3) => {
   return matches
 };
 
-//refactor with a recursive approach
-
 
 //PROTEIN TRANSLATION PROMPT
 
@@ -374,6 +372,119 @@ const translate = (codonInput) => {
   return proteins
 };
 
+//JUICESHOP PROMPT
+
+/**
+ * Determine how long it takes to prepare a certain juice.
+ * 
+ * 'Pure Strawberry Joy' takes 0.5 minutes, 'Energizer' and 'Green Garden' take 1.5 minutes each,
+ * 'Tropical Island' takes 3 minutes and 'All or Nothing' takes 5 minutes.
+ * For all other drinks (e.g., special offers) you can assume a preparation time of 2.5 minutes.
+ *
+ * input:
+ *  {string} name of juice
+ * output:
+ *  {number} time in minutes
+ */
+const timeToMixJuice = (name) => {
+  switch(name) {
+    case 'Pure Strawberry Joy':
+      return 0.5;
+    case 'Energizer':
+      return 1.5;
+    case 'Green Garden':
+      return 1.5;
+    case 'Tropical Island':
+      return 3;
+    case 'All or Nothing':
+      return 5;
+    default:
+      return 2.5
+  }
+};
+
+/**
+ * Calculate the number of limes that need to be cut
+ * to reach a certain supply.
+ * 
+ * She can get 6 wedges from a 'small' lime, 8 wedges from a 'medium' lime and 10 from a 'large' lime.
+ * She always cuts the limes in the order in which they appear in the list, starting with the first item.
+ * She keeps going until she reached the number of wedges that she needs or until she runs out of limes.
+
+ *
+ * input: 
+ *  {number} wedgesNeeded
+ *  {string[]} lime inventory (sizes)
+ * output:
+ *  {number} number of limes cut
+ */
+const limesToCut = (wedgesNeeded, limes) => {
+  let wedges = 0;
+  let i = 0;
+  while (i <= limes.length) {
+    if (wedges >= wedgesNeeded || i === limes.length) {
+      return i
+    };
+    switch(limes[i]) {
+      case 'small':
+        wedges += 6
+        break;
+      case 'medium':
+        wedges += 8
+        break;
+      case 'large':
+        wedges += 10
+        break;
+    };
+    i++;
+  };
+};
+
+/**
+ * Determine which juices still need to be prepared after the end of the shift.
+ * 
+ * To make the hand-over easier, implement a function which takes the number of minutes left in Li Mei's shift
+ * and an array of juices that have been ordered but not prepared yet.
+ * The function should return the orders that Li Mei cannot start preparing before the end of her workday.
+
+ * The time left in the shift will always be greater than 0. The array of juices to prepare will never be empty.
+ * Furthermore, the orders are prepared in the order in which they appear in the array. If Li Mei starts to mix
+ * a certain juice, she will always finish it even if she has to work a bit longer.
+ * If there are no remaining orders left that Dmitry needs to take care of, an empty array should be returned.
+ *
+ * input:
+ *  {number} timeLeft
+ *  {string[]} orders
+ * output:
+ *  {string[]} remaining orders when no time remaining
+ */
+const remainingOrders = (timeLeft, orders) => {
+  do {
+    switch(orders[0]) {
+    case 'Pure Strawberry Joy':
+      timeLeft -= 0.5
+      break;
+    case 'Energizer':
+      timeLeft -= 1.5
+      break;
+    case 'Green Garden':
+      timeLeft -= 1.5
+      break;
+    case 'Tropical Island':
+      timeLeft -= 3
+      break;
+    case 'All or Nothing':
+      timeLeft -= 5
+      break;
+    default:
+      timeLeft -= 2.5
+      break;
+    }
+  orders.shift()
+  } while (timeLeft > 0)
+  return orders
+};
+
 
 
 module.exports = {
@@ -383,5 +494,8 @@ module.exports = {
   steps,
   classify,
   findMatches,
-  translate
+  translate,
+  timeToMixJuice,
+  limesToCut,
+  remainingOrders
 };
