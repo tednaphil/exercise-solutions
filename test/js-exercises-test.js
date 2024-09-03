@@ -6,7 +6,10 @@ const { moveRobot,
         steps,
         classify,
         findMatches,
-        translate
+        translate,
+        timeToMixJuice,
+        limesToCut,
+        remainingOrders
        } = require('../javascript/index')
 
 describe('JavaScript Exercises', () => {
@@ -200,6 +203,103 @@ describe('JavaScript Exercises', () => {
             'Phenylalanine',
             'Phenylalanine',
           ]);
+        });
+      });
+    });
+    describe('JuiceShop', () => {
+      describe('Time To Mix', () => {
+        it('returns the correct time for "Pure Strawberry Joy"', () => {
+          expect(timeToMixJuice('Pure Strawberry Joy')).to.equal(0.5);
+        });
+        it('returns the correct times for other standard menu items', () => {
+          expect(timeToMixJuice('Energizer')).to.equal(1.5);
+          expect(timeToMixJuice('Green Garden')).to.equal(1.5);
+          expect(timeToMixJuice('Tropical Island')).to.equal(3);
+          expect(timeToMixJuice('All or Nothing')).to.equal(5);
+        });
+        it('returns the same tie for all other juices', () => {
+          const defaultTime = 2.5;
+          expect(timeToMixJuice('Limetime')).to.equal(defaultTime);
+          expect(timeToMixJuice('Manic Organic')).to.equal(defaultTime);
+          expect(timeToMixJuice('Papaya & Peach')).to.equal(defaultTime);
+        });
+      });
+      describe('Limes To Cut', () => {
+        it('calculates the number of imes needed to reach the target supply', () => {
+          const limes = [
+            'small',
+            'large',
+            'large',
+            'medium',
+            'small',
+            'large',
+            'large',
+            'medium',
+          ];
+          expect(limesToCut(42, limes)).to.equal(6);
+          expect(limesToCut(4, ['medium', 'small'])).to.equal(1);
+        });
+        it('uses up all limes if there are not enough to reach the target', () => {
+          const limes = [
+            'small',
+            'large',
+            'large',
+            'medium',
+            'small',
+            'large',
+            'large',
+          ];
+          expect(limesToCut(80, limes)).to.equal(7);
+        });
+        it('uses no limes if no wedges are needed', () => {
+          expect(limesToCut(0, ['small', 'large', 'medium'])).to.equal(0);
+        });
+        it('works if no limes are available', () => {
+          expect(limesToCut(10, [])).to.equal(0);
+        });
+      });
+      describe('Remaining Orders', () => {
+        it('accrurately determines remaining orders', () => {
+          const orders = [
+            'Tropical Island',
+            'Energizer',
+            'Limetime',
+            'All or Nothing',
+            'Pure Strawberry Joy',
+          ];
+          const expected = ['All or Nothing', 'Pure Strawberry Joy'];
+          expect(remainingOrders(7, orders)).to.deep.equal(expected);
+        });
+        it('handles orders that were started because time still remained', () => {
+          const orders = [
+            'Pure Strawberry Joy',
+            'Pure Strawberry Joy',
+            'Vitality',
+            'Tropical Island',
+            'All or Nothing',
+            'All or Nothing',
+            'All or Nothing',
+            'Green Garden',
+            'Limetime',
+          ];
+          const expected = ['All or Nothing', 'Green Garden', 'Limetime'];
+          expect(remainingOrders(13, orders)).to.deep.equal(expected);
+        });
+        it('fulfulls all orders if enough time remains', () => {
+          const orders = [
+            'Energizer',
+            'Green Garden',
+            'Ruby Glow',
+            'Pure Strawberry Joy',
+            'Tropical Island',
+            'Limetime',
+          ];
+        expect(remainingOrders(12, orders)).to.deep.equal([]);
+        });
+        it('works if only very little time remains', () => {
+          const orders = ['Bananas Gone Wild', 'Pure Strawberry Joy'];
+          const expected = ['Pure Strawberry Joy'];
+          expect(remainingOrders(0.2, orders)).to.deep.equal(expected);
         });
       });
     });
