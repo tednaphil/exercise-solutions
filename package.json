@@ -3,7 +3,7 @@
     "main": "index.js",
     "scripts": {
         "test": "./node_modules/mocha/bin/mocha test/ --reporter dot --require mocha-clean",
-        "testJavaScript": "./node_modules/mocha/bin/mocha test/js-exercises-test.js --reporter dot --require mocha-clean",
+        "testJavaScript": "./node_modules/mocha/bin/mocha test/js-exercises.test.js --reporter dot --require mocha-clean",
         "testTypeScript": "jest"
     },
     "keywords": [

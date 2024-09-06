@@ -72,11 +72,9 @@ const decodedResistorValue = ([first, second, power]: Color[]) => {
   };
 };
 
-// export default(decodedResistorValue)
-
-// function sum(a, b) {
-//     return a + b;
-//   }
+function sum(a, b) {
+    return a + b;
+  }
 
 
-module.exports = decodedResistorValue/*, sum*/;
+module.exports = {decodedResistorValue, sum};

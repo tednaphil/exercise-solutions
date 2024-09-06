@@ -1,6 +1,4 @@
-
-const decodedResistorValue = require('../typescript/index')
-const sum = require('../typescript/sum');
+const {decodedResistorValue, sum} = require('../typescript/index')
 
 test('adds 1 + 2 to equal 3', () => {
   expect(sum(1, 2)).toBe(3);
