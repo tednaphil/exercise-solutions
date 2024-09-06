@@ -9,8 +9,8 @@ const { moveRobot,
         translate,
         timeToMixJuice,
         limesToCut,
-        remainingOrders
-       } = require('../javascript/index')
+        remainingOrders,
+       } = require('../javascript/index');
 
 describe('JavaScript Exercises', () => {
     describe('MoveRobot', () => {

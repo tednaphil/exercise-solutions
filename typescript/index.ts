@@ -73,3 +73,8 @@ const decodedResistorValue = ([first, second, power]: Color[]) => {
 };
 
 export default(decodedResistorValue)
+
+
+
+
+// module.exports = decodedResistorValue;
