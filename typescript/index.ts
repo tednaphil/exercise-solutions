@@ -71,3 +71,5 @@ const decodedResistorValue = ([first, second, power]: Color[]) => {
       return (`${base * (0 ** ResistorValues[power])} ohms`);
   };
 };
+
+export default(decodedResistorValue)
