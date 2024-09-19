@@ -284,16 +284,18 @@ const classify = (num) => {
 const findMatches = (arr1, arr2, arr3) => {
   const accArray = [...arr1, ...arr2, ...arr3];
   const elementCount = {};
+  const matches = [];
   for (const num of accArray) {
     if(!elementCount[num]){
       elementCount[num] = 0
     }
     elementCount[num] += 1
-  }
-  const matches = Object.keys(elementCount).filter(key => elementCount[key] === 3)
-  for (const element of matches) {
-    matches[matches.indexOf(element)] = Number(element)
-  }
+  };
+  for (const key of Object.keys(elementCount)) {
+    if(elementCount[key] === 3) {
+      matches.push(Number(key))
+    }
+  };
   return matches
 };
 
