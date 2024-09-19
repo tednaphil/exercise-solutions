@@ -525,6 +525,45 @@ const remainingOrders = (timeLeft, orders) => {
   return orders
 };
 
+function pizzaPrice(pizza, ...extras) {
+  const prices = {
+    ExtraSauce: 1,
+    ExtraToppings: 2,
+    Margherita: 7,
+    Caprese: 9,
+    Formaggio: 10
+  };
+  let price = prices[pizza];
+
+  if(!extras.length) {
+    return price
+  } else {
+    let extrasPrice = prices[extras[0]]
+    extras.splice(0, 1)
+    return pizzaPrice(pizza, ...extras) + extrasPrice
+  }
+}
+
+/**
+ * Calculate the price of the total order, given individual orders
+ *
+ * (HINT: For this exercise, you can take a look at the supplied "global.d.ts" file
+ * for a more info about the type definitions used)
+ *
+ * input array of pizza orders
+ * returns number the price of the total order
+ */
+function orderPrice(pizzaOrders) {
+  let total = 0;
+  if(!pizzaOrders.length) {
+    return total
+  } else {
+    let price = pizzaPrice(pizzaOrders[0].pizza, ...pizzaOrders[0].extras);
+    pizzaOrders.splice(0, 1)
+    return price + orderPrice(pizzaOrders)
+  }
+}
+
 
 
 module.exports = {
@@ -537,5 +576,7 @@ module.exports = {
   translate,
   timeToMixJuice,
   limesToCut,
-  remainingOrders
+  remainingOrders,
+  pizzaPrice,
+  orderPrice
 };
