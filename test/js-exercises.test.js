@@ -10,6 +10,8 @@ const { moveRobot,
         timeToMixJuice,
         limesToCut,
         remainingOrders,
+        pizzaPrice,
+        orderPrice
        } = require('../javascript/index');
 
 describe('JavaScript Exercises', () => {
@@ -303,5 +305,8 @@ describe('JavaScript Exercises', () => {
         });
       });
     });
+    describe('Pizza Order', () => {
+      
+    })
     
 })
