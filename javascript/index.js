@@ -557,11 +557,11 @@ function orderPrice(pizzaOrders) {
   let total = 0;
   if(!pizzaOrders.length) {
     return total
-  } else {
-    let price = pizzaPrice(pizzaOrders[0].pizza, ...pizzaOrders[0].extras);
-    pizzaOrders.splice(0, 1)
-    return price + orderPrice(pizzaOrders)
-  }
+  };
+  for(const pizza of pizzaOrders) {
+    total += pizzaPrice(pizza.pizza, ...pizza.extras)
+  };
+  return total
 }
 
 
