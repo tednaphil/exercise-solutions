@@ -274,13 +274,28 @@ const classify = (num) => {
 //iterate through arr1 with filter for
     //if arr 2 & arr 3 include current num
 
+// const findMatches = (arr1, arr2, arr3) => {
+//   const matches = arr1.filter(num => {
+//       return arr2.includes(num) && arr3.includes(num)
+//   });
+//   return matches
+// };
+
 const findMatches = (arr1, arr2, arr3) => {
-  const matches = arr1.filter(num => {
-      return arr2.includes(num) && arr3.includes(num)
-  });
+  const accArray = [...arr1, ...arr2, ...arr3];
+  const elementCount = {};
+  for (const num of accArray) {
+    if(!elementCount[num]){
+      elementCount[num] = 0
+    }
+    elementCount[num] += 1
+  }
+  const matches = Object.keys(elementCount).filter(key => elementCount[key] === 3)
+  for (const element of matches) {
+    matches[matches.indexOf(element)] = Number(element)
+  }
   return matches
 };
-
 
 //PROTEIN TRANSLATION PROMPT
 
