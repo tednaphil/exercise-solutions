@@ -306,6 +306,25 @@ describe('JavaScript Exercises', () => {
       });
     });
     describe('Pizza Order', () => {
+      describe('Pizza Prices', () => {
+        it('Returns correct prices for plain pizzas', () => {
+          expect(pizzaPrice('Margherita')).to.equal(7);
+          expect(pizzaPrice('Caprese')).to.equal(9);
+          expect(pizzaPrice('Formaggio')).to.equal(10);
+        });
+        it('Returns correct price for pizza with lots of extra toppings', () => {
+          expect(
+            pizzaPrice(
+              'Caprese',
+              'ExtraToppings',
+              'ExtraToppings',
+              'ExtraToppings',
+              'ExtraToppings',
+            )
+          ).to.equal(17);
+        });
+      })
+
       
     })
     
