@@ -323,6 +323,9 @@ describe('JavaScript Exercises', () => {
             )
           ).to.equal(17);
         });
+        it('Returns correct price for pizza with extra sauce and toppings', () => {
+          expect(pizzaPrice('Caprese', 'ExtraSauce', 'ExtraSauce', 'ExtraToppings', 'ExtraToppings')).to.equal(15);
+        })
       })
 
       
