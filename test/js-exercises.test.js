@@ -379,19 +379,24 @@ describe("JavaScript Exercises", () => {
             "ExtraSauce",
           ],
         };
-        expect(orderPrice([
-          margherita,
-          caprese,
-          caprese2,
-          formaggio,
-          formaggio2,
-          formaggio3,
-          formaggio4,
-        ])).to.equal(85)
+        expect(
+          orderPrice([
+            margherita,
+            caprese,
+            caprese2,
+            formaggio,
+            formaggio2,
+            formaggio3,
+            formaggio4,
+          ])
+        ).to.equal(85);
       });
-      it('Returns correct price for very large order', () => {
-        const order = Array(100 * 1000).fill({pizza: 'Margherita', extras: []});
-        expect(orderPrice(order)).to.equal(700 * 1000)
+      it("Returns correct price for very large order", () => {
+        const order = Array(100 * 1000).fill({
+          pizza: "Margherita",
+          extras: [],
+        });
+        expect(orderPrice(order)).to.equal(700 * 1000);
       });
     });
   });
