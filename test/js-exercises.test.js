@@ -389,6 +389,10 @@ describe("JavaScript Exercises", () => {
           formaggio4,
         ])).to.equal(85)
       });
+      it('Returns correct price for very large order', () => {
+        const order = Array(100 * 1000).fill({pizza: 'Margherita', extras: []});
+        expect(orderPrice(order)).to.equal(700 * 1000)
+      });
     });
   });
 });
