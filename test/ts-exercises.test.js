@@ -63,4 +63,9 @@ describe('RNA Transcription', () => {
   it('Transcribes multiple nucleotides accurately', () => {
     expect(toRna('ACGTGGTCTTAA')).toEqual('UGCACCAGAAUU')
   });
+  it('Handles invalid inputs', () => {
+    expect(() => toRna('U')).toThrow('Invalid input DNA.');
+    expect(() => toRna('XX')).toThrow('Invalid input DNA.');
+    expect(() => toRna('These are not nucleotides')).toThrow('Invalid input DNA.');
+  });
 });
