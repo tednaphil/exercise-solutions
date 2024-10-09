@@ -1,5 +1,6 @@
 import { describe, it, expect, xit } from '@jest/globals';
 const {decodedResistorValue} = require('../typescript/index');
+const {toRna} = require('../typescript/index');
 
 describe('Resistor Colors', () => {
   it('Orange and orange and black', () => {
@@ -44,4 +45,10 @@ describe('Resistor Colors', () => {
       '650 kiloohms'
     )
   })
+});
+
+describe('RNA Transcription', () => {
+  it('Invokes function', () => {
+    expect(toRna('A')).toEqual('U')
+  });
 });
