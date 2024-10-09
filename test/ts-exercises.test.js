@@ -48,7 +48,19 @@ describe('Resistor Colors', () => {
 });
 
 describe('RNA Transcription', () => {
-  it('Invokes function', () => {
+  it('Transcribes cytosine to guanine', () => {
+    expect(toRna('C')).toEqual('G')
+  });
+  it('Transcribes guanine to cytosine', () => {
+    expect(toRna('G')).toEqual('C')
+  });
+  it('Transcribes adenine to uracil', () => {
     expect(toRna('A')).toEqual('U')
+  });
+  it('Transcribes thymine to adenine', () => {
+    expect(toRna('T')).toEqual('A')
+  });
+  it('Transcribes multiple nucleotides accurately', () => {
+    expect(toRna('ACGTGGTCTTAA')).toEqual('UGCACCAGAAUU')
   });
 });
