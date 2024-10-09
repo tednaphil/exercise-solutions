@@ -72,5 +72,28 @@ const decodedResistorValue = ([first, second, power]: Color[]) => {
   };
 };
 
+/**RNA TRANSCRIPTION PROMPT
+  TO DO: add prompt details and annotate solution
+*/
 
-module.exports = {decodedResistorValue};
+function toRna(strand: string): string {
+  interface N {
+    [key: string]: string
+  };
+
+  const nucleotides: N = {
+    G: 'C',
+    C: 'G',
+    T: 'A',
+    A: 'U'
+  };
+
+  if(/[^GCTA]/.test(strand)) {
+    throw new Error('Invalid input DNA.')
+  };
+  
+  return strand.replace(/[GCTA]/g, n => nucleotides[n]);
+};
+
+
+module.exports = {decodedResistorValue, toRna};
